@@ -253,5 +253,56 @@ namespace Arrays_And_Strings
             //no rules were broken, case is true
             return true;
         }
+
+        /// <summary>
+        /// this method takes in an M x N matrix and finds any zero element
+        /// and changes that entire row and coloumn to zeros.
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static int[][] zeroMatrix(int[][] matrix)
+        {
+            List<int[]> indexes = new List<int[]>();
+            int[] map;
+            for(int i = 0; i< matrix.GetLength(0); i++)
+            {
+                for(int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if(matrix[i][j] == 0)
+                    {
+                        map = new int[2];
+                        map[0] = i;
+                        map[1] = j;
+                        indexes.Add(map); 
+                    }
+                }
+            }
+            
+            return transformZeros(indexes, matrix);
+        }
+
+        /// <summary>
+        /// this is a helper method for the zero matrix method
+        /// </summary>
+        /// <param name="indexes"></param>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static int [][] transformZeros(List<int[]> indexes, int[][] matrix)
+        {
+            foreach (int[] index in indexes)
+            {
+                int row = index[0];
+                int col = index[1];
+                for (int i = 0; i < matrix.GetLength(0); i++)
+                {
+                    matrix[row][i] = 0;
+                }
+                for (int j = 0; j < matrix.GetLength(0); j++)
+                {
+                    matrix[j][col] = 0;
+                }
+            }
+            return matrix;
+        }
     }
 }
